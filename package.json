@@ -1,8 +1,8 @@
 {
   "name": "view-background-image",
   "private": true,
-  "version": "1.0.2",
-  "description": "Adds a \"open background image in new tab\" menu item. Finds closest element to the clicked area that has a background image.",
+  "version": "1.0.4",
+  "description": "Adds \"Open background image in new tab\" and \"Save background image as ...\" menu items. Finds closest element to the clicked area that has a background image.",
   "main": "background.js",
   "scripts": {
     "test": "eslint .",
