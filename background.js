@@ -18,10 +18,18 @@ chrome.contextMenus.onClicked.addListener(function onContextMenu(info, tab) {
             return console.error('Failed to find any background image');
         }
 
-        chrome.downloads.download({
+        var downloadOptions = {
             url: response,
-            saveAs: true
-        }, function(id) {
+            conflictAction: 'overwrite'
+        };
+        if (response.includes('id=OHR.')) {
+            downloadOptions.filename = 'Bing/' + response.match(/id=OHR\.([^\.]+\.jpg)/)[1];
+        } else {
+            delete downloadOptions.conflictAction;
+            downloadOptions.saveAs = true;
+        }
+
+        chrome.downloads.download(downloadOptions, function(id) {
             downloadIds.push(id);
         });
     });
