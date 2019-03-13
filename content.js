@@ -7,15 +7,25 @@ document.addEventListener('DOMContentLoaded', function() {
     var target;
 
     function getBackgroundImage(element) {
+        element = document.getElementById('bgDiv') || element;
+
         while (element) {
             var bg = getComputedStyle(element).getPropertyValue('background-image');
 
             if (bg !== 'none') {
-                return bg.match(/url\("?(.+?)"?\)/)[1];
+                var bgMatchArray = bg.match(/url\("?(.+?)"?\)/);
+
+                return bgMatchArray ? bgMatchArray[1] : bg;
             }
 
             element = element.parentElement;
         }
+
+        var elements = document.getElementsByClassName('img_cont');
+        if (elements) {
+            element = elements[0];
+        }
+        return getBackgroundImage(element);
     }
 
     function setTarget(e) {
