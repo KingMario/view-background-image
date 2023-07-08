@@ -7,7 +7,9 @@ document.addEventListener('DOMContentLoaded', function() {
     var target;
 
     function getBackgroundImage(element) {
-        element = document.getElementById('bgDiv') || element;
+        element = document.getElementsByClassName('img_cont')[0]
+            || document.getElementsByClassName('img_uhd')[0]
+            || element;
 
         while (element) {
             var bg = getComputedStyle(element).getPropertyValue('background-image');

@@ -23,7 +23,7 @@ chrome.contextMenus.onClicked.addListener(function onContextMenu(info, tab) {
             conflictAction: 'overwrite'
         };
         if (response.includes('id=OHR.')) {
-            downloadOptions.filename = 'Bing/' + response.match(/id=OHR\.([^\.]+\.jpg)/)[1];
+            downloadOptions.filename = 'Bing/' + response.match(/id=OHR\.([^\.]+\.(jpg|webp))/)[1];
         } else {
             delete downloadOptions.conflictAction;
             downloadOptions.saveAs = true;

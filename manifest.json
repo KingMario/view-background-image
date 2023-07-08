@@ -1,12 +1,14 @@
 {
-    "manifest_version": 2,
+    "manifest_version": 3,
     "name": "View background image",
-    "version": "1.0.4",
+    "version": "1.0.5",
     "description": "Adds a \"Save background image as ...\" menu item. Finds closest element to the clicked area that has a background image.",
-    "permissions": ["contextMenus", "<all_urls>", "downloads"],
+    "permissions": ["contextMenus", "downloads"],
+    "host_permissions": [
+        "<all_urls>"
+    ],
     "background": {
-        "persistent": false,
-        "scripts": ["background.js"]
+        "service_worker": "background.js"
     },
     "content_scripts": [{
         "js": ["content.js"],
