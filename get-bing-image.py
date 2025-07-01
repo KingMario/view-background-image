@@ -8,15 +8,11 @@ def get_bing_background_media_path():
     response = requests.get(url)
     response.raise_for_status()
     data = response.json()
-    # The background image info is usually under 'MediaContents'
-    media_contents = data.get('MediaContents', [])
-    if media_contents:
+    if media_contents := data.get('MediaContents', []):
         # The 'ImageContent' type usually contains the background image
         for item in media_contents:
-            if item.get('ImageContent'):
-                image_content = item['ImageContent']
-                media_path = image_content.get('Image', {}).get('Url')
-                return media_path
+            if image_content := item.get('ImageContent'):
+                return image_content.get('Image', {}).get('Url')
     return None
 
 def download_webp_from_url(url):
@@ -25,7 +21,7 @@ def download_webp_from_url(url):
     if not match:
         print("Could not extract filename from URL.")
         return
-    filename = match.group(1) + ".webp"
+    filename = f"{match[1]}.webp"
     print(f"Downloading {url} as {filename} ...")
     resp = requests.get(url)
     resp.raise_for_status()
@@ -33,8 +29,7 @@ def download_webp_from_url(url):
         f.write(resp.content)
     print(f"Saved as {filename}")
 if __name__ == "__main__":
-    media_path = get_bing_background_media_path()
-    if media_path:
+    if media_path := get_bing_background_media_path():
         print("Bing background media path:", media_path)
         download_webp_from_url(media_path)
     else:
